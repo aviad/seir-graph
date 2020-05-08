@@ -27,46 +27,45 @@
 
 * Comments
 
-|   # | Line/func in seri.py               | comment                                                                       |
-|     | <l>                                |                                                                               |
-|-----+------------------------------------+-------------------------------------------------------------------------------|
-|     | all                                | great docstrings!!! they really help!                                         |
-|   0 | NA                                 | add requirements.txt                                                          |
-|     | 69                                 | what is "PROB_INFECTED_DETECTED"                                              |
-|     | 79                                 | PROB_EXPOSED_DETECTED ?                                                       |
-|     | 84                                 | where is DOUBLING_DAYS used?                                                  |
-|     | all                                | run `black` on your code                                                      |
-|     | 101-118                            | document every line in `__init__`                                             |
-|     | 101-118                            | explain what is G. using the name is not something I've seen                  |
-|     | 101-118                            | `results_df` - why get from outside?                                          |
-|     | all                                | need someone more familiar with pandas to review (I understand, but..)        |
-|     | 101-118                            | instead of `setattr`/`hasattr`, I'd have a `params` dict/bunch                |
-|     |                                    | on self                                                                       |
-|     | 95                                 | move generate_scale_free_graph to before `SimulationResults`                  |
-|   1 | simulation                         | say: "start reading with simulation" or "entrypoint" pointing to              |
-|     |                                    | this on very early in the file, so readers know where to start. It            |
-|     |                                    | also has a wonderful docstring :)                                             |
-|     | simulation                         | what is E_left? maybe rename or explain.                                      |
-|     |                                    | (I called ifectious Es "EI"s). I now see it explained in line 411             |
-|     |                                    | I just had a "turns-to-I" calculated when moving S->E attribute, so did not   |
-|     |                                    | have to re-calculate this.                                                    |
-|   2 | simulation                         | can this be broken to smaller funcs? Ideally this should be <20 lines         |
-| 2.5 | simulation                         | _step funcs: many args. I'd put all of these in a dict                        |
-|     |                                    | and call the funcs with **params. This would make the func shorter            |
-|     | 798                                | factor out to separate function, or just pass `counters` to __init__          |
-|     |                                    | and do everything there                                                       |
-|     | init_states                        | all the vector usage is cool :)                                               |
-| D10 | init_states                        | you might have slightly "missing" Es since you filter out Is later            |
-|     |                                    | instead or before sampling. NOT saying this is important.                     |
-|     | init_states                        | consider retuning a dict or named tuple                                       |
-|     | individual_infection_probabilities | I did not get it. Could it be you're doing more work than needed?             |
-|     | General                            | in my implementation I used a graph library and setting attributes            |
-|     |                                    | on nodes, similar to                                                          |
-|     |                                    | https://networkx.github.io/documentation/stable/tutorial.html#node-attributes |
-|     |                                    | This makes things more explicit and does not have all these (NICE) arrs       |
-|     | random_subset                      | by ignoring those already in the set you're doing too much.                   |
-|     | infection_step                     | implicitly changing E_left, explicitly S_arr, E_arr                           |
-|     | incubation_step                    | very elegant!                                                                 |
-|     | incubation_step                    | had E_left been an integer (of steps), no need for _EPSILON                   |
-|     | 569                                | `prob_exposed_detected` is probably not the right name, it's about population |
-|     |                                    |                                                                               |
+|   # | Line/func in seri.py               | comment                                                                                                                      |
+|     | <l>                                |                                                                                                                              |
+|-----+------------------------------------+------------------------------------------------------------------------------------------------------------------------------|
+|     | all                                | great docstrings!!! they really help!                                                                                        |
+|   0 | NA                                 | add requirements.txt                                                                                                         |
+|     | 69                                 | what is "PROB_INFECTED_DETECTED"                                                                                             |
+|     | 79                                 | PROB_EXPOSED_DETECTED ?                                                                                                      |
+|     | 84                                 | where is DOUBLING_DAYS used?                                                                                                 |
+|     | all                                | run `black` on your code                                                                                                     |
+|     | 101-118                            | document every line in `__init__`                                                                                            |
+|     | 101-118                            | explain what is G. using the name is not something I've seen                                                                 |
+|     | 101-118                            | `results_df` - why get from outside?                                                                                         |
+|     | all                                | need someone more familiar with pandas to review (I understand, but..)                                                       |
+|     | 101-118                            | instead of `setattr`/`hasattr`, I'd have a `params` dict/bunch                                                               |
+|     |                                    | on self                                                                                                                      |
+|     | 95                                 | move generate_scale_free_graph to before `SimulationResults`                                                                 |
+|   1 | simulation                         | say: "start reading with simulation" or "entrypoint" pointing to                                                             |
+|     |                                    | this on very early in the file, so readers know where to start. It                                                           |
+|     |                                    | also has a wonderful docstring :)                                                                                            |
+|     | simulation                         | what is E_left? maybe rename or explain.                                                                                     |
+|     |                                    | (I called ifectious Es "EI"s). I now see it explained in line 411                                                            |
+|     |                                    | I just had a "turns-to-I" calculated when moving S->E attribute, so did not                                                  |
+|     |                                    | have to re-calculate this.                                                                                                   |
+|   2 | simulation                         | can this be broken to smaller funcs? Ideally this should be <20 lines                                                        |
+| 2.5 | simulation                         | _step funcs: many args. I'd put all of these in a dict                                                                       |
+|     |                                    | and call the funcs with **params. This would make the func shorter                                                           |
+|     | 798                                | factor out to separate function, or just pass `counters` to __init__                                                         |
+|     |                                    | and do everything there                                                                                                      |
+|     | init_states                        | all the vector usage is cool :)                                                                                              |
+| D10 | init_states                        | you might have slightly "missing" Es since you filter out Is later instead or before sampling. NOT saying this is important. |
+|     | init_states                        | consider retuning a dict or named tuple                                                                                      |
+|     | individual_infection_probabilities | I did not get it. Could it be you're doing more work than needed?                                                            |
+|     | General                            | in my implementation I used a graph library and setting attributes                                                           |
+|     |                                    | on nodes, similar to                                                                                                         |
+|     |                                    | https://networkx.github.io/documentation/stable/tutorial.html#node-attributes                                                |
+|     |                                    | This makes things more explicit and does not have all these (NICE) arrs                                                      |
+|     | random_subset                      | by ignoring those already in the set you're doing too much.                                                                  |
+|     | infection_step                     | implicitly changing E_left, explicitly S_arr, E_arr                                                                          |
+|     | incubation_step                    | very elegant!                                                                                                                |
+|     | incubation_step                    | had E_left been an integer (of steps), no need for _EPSILON                                                                  |
+|     | 569                                | `prob_exposed_detected` is probably not the right name, it's about population                                                |
+|     |                                    |                                                                                                                              |
